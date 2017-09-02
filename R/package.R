@@ -4,7 +4,7 @@
 #' 
 #' @docType package
 #' @author Travers <traversc@gmail.com>
-#' @import Rcpp BH
+#' @import Rcpp
 #' @importFrom Rcpp evalCpp
 #' @useDynLib msgpack2R
 #' @name msgpack2R

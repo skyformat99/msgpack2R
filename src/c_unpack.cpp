@@ -91,8 +91,7 @@ struct unpack_visitor:boost::static_visitor<SEXP> {
     }
     template <typename T>
     SEXP operator()(T const&) const {
-        std::cout << "  match others" << std::endl;
-        return IntegerVector::create(234);
+        return(R_NilValue);
     }
 };
 

@@ -1,0 +1,14 @@
+Package: msgpack2R
+Type: Package
+Title: Convert to and from Msgpack Objects
+Version: 0.1
+Date: 2017-09-27
+Author: Travers Ching
+Maintainer: Travers Ching <traversc@gmail.com>
+Description: Convert to and from msgpack objects.
+License: GPL-2
+LazyLoad: yes
+Imports: Rcpp (>= 0.11.0), BH
+LinkingTo: Rcpp, BH
+RoxygenNote: 6.0.1
+Built: R 3.4.1; x86_64-pc-linux-gnu; 2017-09-02 21:02:57 UTC; unix

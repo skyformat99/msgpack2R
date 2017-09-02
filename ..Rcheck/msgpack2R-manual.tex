@@ -1,0 +1,162 @@
+\nonstopmode{}
+\documentclass[letterpaper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8,latin1]{inputenc}
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `msgpack2R'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Convert to and from Msgpack Objects}
+\item[Version]\AsIs{0.1}
+\item[Date]\AsIs{2017-09-27}
+\item[Author]\AsIs{Travers Ching}
+\item[Maintainer]\AsIs{Travers Ching }\email{traversc@gmail.com}\AsIs{}
+\item[Description]\AsIs{Convert to and from msgpack objects.}
+\item[License]\AsIs{GPL-2}
+\item[LazyLoad]\AsIs{yes}
+\item[Imports]\AsIs{Rcpp (>= 0.11.0), BH}
+\item[LinkingTo]\AsIs{Rcpp, BH}
+\item[RoxygenNote]\AsIs{6.0.1}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{msgpack2R}{msgpack2R}{msgpack2R}
+\aliasA{msgpack2R-package}{msgpack2R}{msgpack2R.Rdash.package}
+%
+\begin{Description}\relax
+Package for converting to and from msgpack objects
+\end{Description}
+%
+\begin{Author}\relax
+Travers <traversc@gmail.com>
+\end{Author}
+\inputencoding{utf8}
+\HeaderA{msgpack\_format}{Format data for msgpack}{msgpack.Rul.format}
+%
+\begin{Description}\relax
+A helper function to format R data for input to msgpack
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+msgpack_format(x)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] An r object.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A formatted R object to use as input to msgpack\_pack.
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{msgpack\_map}{Msgpack Map}{msgpack.Rul.map}
+%
+\begin{Description}\relax
+A helper function to create a map object for input to msgpack
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+msgpack_map(key, value)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{key}] A list or vector of keys (coerced to list).  Duplicate keys are fine (connects to std::multimap in C++).
+
+\item[\code{value}] A list or vector of values (coerced to list).  This should be the same length as key.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+An data.frame also of class "map" that can be used as input to msgpack\_pack.
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{msgpack\_pack}{Msgpack Pack}{msgpack.Rul.pack}
+%
+\begin{Description}\relax
+Serialize any number of objects into a single message.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+msgpack_pack(...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{...}] Any R objects that have corresponding msgpack types.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A raw vector containing the message.
+\end{Value}
+%
+\begin{SeeAlso}\relax
+See test.r for examples in the package directory.
+\end{SeeAlso}
+\inputencoding{utf8}
+\HeaderA{msgpack\_simplify}{Simplify msgpack}{msgpack.Rul.simplify}
+%
+\begin{Description}\relax
+A helper function for simplifying a msgpack return object
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+msgpack_simplify(x)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] Return object from msgpack\_unpack.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A simplified return object from msgpack\_unpack.  E.g., arrays of all the same type are concatenated into an atomic vector.
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{msgpack\_unpack}{Msgpack Pack}{msgpack.Rul.unpack}
+%
+\begin{Description}\relax
+De-serialize a msgpack message.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+msgpack_unpack(message)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{message}] A raw vector containing the message.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+The message pack object(s) converted into R types.  If more than one object exists in the message, a list of class "msgpack\_set" containing the objects.
+\end{Value}
+%
+\begin{SeeAlso}\relax
+See test.r for examples in the package directory.
+\end{SeeAlso}
+\printindex{}
+\end{document}
