@@ -13,8 +13,8 @@
 
 library(msgpack2R)
 # library(Rcpp)
-# sourceCpp("src/c_unpack.cpp")
-# sourceCpp("src/c_pack.cpp")
+# sourceCpp("src/msgpack_unpack.cpp")
+# sourceCpp("src/msgpack_pack.cpp")
 # source("R/functions.r")
 
 catn <- function(...) cat(..., "\n")
@@ -22,40 +22,40 @@ catn <- function(...) cat(..., "\n")
 # Test atomic types
 
 # integer
-xpk <- c_pack(1)
-catn(identical(c_unpack(xpk), 1))
+xpk <- msgpack_pack(1)
+catn(identical(msgpack_unpack(xpk), 1))
 
 # double
-xpk <- c_pack(1.54)
-catn(identical(c_unpack(xpk), 1.54))
+xpk <- msgpack_pack(1.54)
+catn(identical(msgpack_unpack(xpk), 1.54))
 
 # string
-xpk <- c_pack("sdfsdf")
-catn(identical(c_unpack(xpk), "sdfsdf"))
+xpk <- msgpack_pack("sdfsdf")
+catn(identical(msgpack_unpack(xpk), "sdfsdf"))
 
 # raw
-xpk <- c_pack(as.raw(c(0x28, 0x4F)))
-catn(identical(c_unpack(xpk), as.raw(c(0x28, 0x4F))))
+xpk <- msgpack_pack(as.raw(c(0x28, 0x4F)))
+catn(identical(msgpack_unpack(xpk), as.raw(c(0x28, 0x4F))))
 
 # boolean
-xpk <- c_pack(T)
-catn(c_unpack(xpk))
+xpk <- msgpack_pack(T)
+catn(msgpack_unpack(xpk))
 
 # nil
-xpk <- c_pack(NULL)
-catn(is.null(c_unpack(xpk)))
+xpk <- msgpack_pack(NULL)
+catn(is.null(msgpack_unpack(xpk)))
 
 # ext
 x <- as.raw(c(0x28, 0x4F))
 attr(x, "EXT") <- 1L
-xpk <- c_pack(x)
-catn(identical(c_unpack(xpk), x))
+xpk <- msgpack_pack(x)
+catn(identical(msgpack_unpack(xpk), x))
 
 
 # unicode or something characters
 x <- list('图书，通常在狭义上的理解是带有文字和图像的纸张的集合。书通常由墨水、纸张、羊皮纸或者其他材料固定在书脊上组成。组成书的一张纸称为一张，一张的一面称为一页。但随着科学技术的发展，狭义图书的概念也在扩展，制作书的材料也在改变，如电子格式的电子书。从广义理解的图书，则是一切传播讯息的媒介。书也指文学作品或者其中的一部分。在图书馆信息学中，书被称为专著，以区别于杂志、学术期刊、报纸等连载期刊。所有的书面作品（包括图书）的主体是文学。在小说和一些类型（如传记）中，书可能还要分成卷。对书特别喜爱的人被称为爱书者或藏书家，更随意的称呼是书虫或者书呆子。买书的地方叫书店，图书馆则是可以借阅书籍的地方。2010年，谷歌公司估计，从印刷术发明至今，大概出版了一亿三千万本不同书名的书籍。[1]')
-xpk <- c_pack(x)
-xu <- c_unpack(xpk)
+xpk <- msgpack_pack(x)
+xu <- msgpack_unpack(xpk)
 catn(identical(x, xu))
 
 # Complex nested object with lists and map
@@ -70,8 +70,8 @@ y <- 1:10
 names(y) <- letters[1:10]
 x <- list(1:10, y, "a", list(3,raw(4)), xmap)
 x <- msgpack_format(x)
-xpk <- c_pack(x)
-xu <- c_unpack(xpk)
+xpk <- msgpack_pack(x)
+xu <- msgpack_unpack(xpk)
 
 xs <- msgpack_simplify(x)
 xus <- msgpack_simplify(xu)
@@ -80,8 +80,8 @@ catn(identical(xs, xus))
 
 # named list can be used directly as input - should come out to a map, simplify to get a named vector
 x <- list(a=1L, b=2L)
-xpk <- c_pack(x)
-catn(identical(msgpack_simplify(c_unpack(xpk)),c(a=1L, b=2L)))
+xpk <- msgpack_pack(x)
+catn(identical(msgpack_simplify(msgpack_unpack(xpk)),c(a=1L, b=2L)))
 
 # multiple objects
 xpk <- msgpack_pack(1,2,3,5,"a", msgpack_format(1:10))
@@ -91,5 +91,5 @@ catn(identical(msgpack_simplify(xu[[6]]), 1:10))
 # speed test
 require(microbenchmark)
 x <- as.list(1:1e7)
-print(microbenchmark(xpk <- c_pack(x), times=3)) # 0.5 seconds
-print(microbenchmark(xu <- c_unpack(xpk), times=3)) #2.4 seconds
+print(microbenchmark(xpk <- msgpack_pack(x), times=3)) # 0.5 seconds
+print(microbenchmark(xu <- msgpack_unpack(xpk), times=3)) #2.4 seconds
