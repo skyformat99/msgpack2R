@@ -18,9 +18,8 @@ Maps are converted to data.frames with additional class "map".  Map objects in R
 See tests.r for more examples.  
 ```
 library(msgpack2R)
+
 x <- as.list(1:1e7)
-# Serialize to msgpack
 xpk <- msgpack_pack(x)
-# De-serialize to R
 xu <- msgpack_unpack(xpk)
 ```
