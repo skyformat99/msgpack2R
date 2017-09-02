@@ -11,11 +11,11 @@ Maps are converted to data.frames with additional class "map".  Map objects in R
 ### Installation:
 1. On Windows, install Rtools (https://cran.r-project.org/bin/windows/Rtools/)
 2. In R, install devtools: install.packages("devtools")
-3. library(devtools)
-4. install_github("traversc/msgpack2R")
+3. `library(devtools)`
+4. `install_github("traversc/msgpack2R")`
 
 ### Example:
-See tests.r for more examples.  
+See `tests.r` for more examples.  
 ```
 library(msgpack2R)
 
