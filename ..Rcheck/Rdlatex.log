@@ -1,2 +1,0 @@
-Error in .pkg2tex(files, outfile, encoding = encoding, append = append,  : 
-  this package does not have either a ‘latex’ or a (source) ‘man’ directory
